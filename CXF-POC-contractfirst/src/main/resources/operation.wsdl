@@ -1,0 +1,56 @@
+<wsdl:definitions xmlns:ns1="http://cxf.apache.org/bindings/xformat"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://cxf.poc.ideo.com/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	name="OperationWS" targetNamespace="http://cxf.poc.ideo.com/">
+	<wsdl:types>
+		<xs:schema xmlns:tns="http://cxf.poc.ideo.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			elementFormDefault="unqualified" targetNamespace="http://cxf.poc.ideo.com/"
+			version="1.0">
+			<xs:element name="additionRequest" type="tns:additionRequest" />
+			<xs:element name="additionResponse" type="tns:additionResponse" />
+			<xs:complexType name="additionRequest">
+				<xs:sequence>
+					<xs:element name="arg0" type="xs:int" />
+					<xs:element name="arg1" type="xs:int" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="additionResponse">
+				<xs:sequence>
+					<xs:element name="return" type="xs:int" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="messageAdditionRequest">
+		<wsdl:part element="tns:additionRequest" name="additionRequest"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="messageAdditionResponse">
+		<wsdl:part element="tns:additionResponse" name="additionResponse"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="OperationService">
+		<wsdl:operation name="addition">
+			<wsdl:input message="tns:messageAdditionRequest" name="additionRequest"></wsdl:input>
+			<wsdl:output message="tns:messageAdditionResponse" name="additionResponse"></wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="OperationServiceImplServiceSoapBinding"
+		type="tns:OperationService">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="addition">
+			<soap:operation soapAction="" style="document" />
+			<wsdl:input name="additionRequest">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="additionResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="OperationWS">
+		<wsdl:port binding="tns:OperationServiceImplServiceSoapBinding"
+			name="OperationServiceImplPort">
+			<soap:address location="http://localhost:8080/OperationService" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
