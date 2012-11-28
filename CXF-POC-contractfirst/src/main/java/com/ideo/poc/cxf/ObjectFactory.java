@@ -35,19 +35,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AdditionResponse }
-     * 
-     */
-    public AdditionResponse createAdditionResponse() {
-        return new AdditionResponse();
-    }
-
-    /**
      * Create an instance of {@link AdditionRequest }
      * 
      */
     public AdditionRequest createAdditionRequest() {
         return new AdditionRequest();
+    }
+
+    /**
+     * Create an instance of {@link AdditionResponse }
+     * 
+     */
+    public AdditionResponse createAdditionResponse() {
+        return new AdditionResponse();
     }
 
     /**
